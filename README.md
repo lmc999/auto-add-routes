@@ -16,7 +16,7 @@ cmroute.dll会被上述两个批处理文件调用，作用是秒载/秒删路�
 ### Wireguard
 #### 1. 下载最新版本Tunsafe，建议使用带rc的版本。
 
-#### 2. 开启Tunsafe的Pr/Post命令功能。在"Option"选择"Allow Pre/Post Commands"
+#### 2. 开启Tunsafe的Pre/Post命令功能。在"Option"选择"Allow Pre/Post Commands"
 
 #### 3. 下载[route.zip](https://raw.githubusercontent.com/lmc999/auto-add-routes/master/route.zip)解压到Tunsafe安装目录。
 

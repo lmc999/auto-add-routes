@@ -9,7 +9,7 @@ add.txt和del.txt为写入和删除时使用的路由表；
 
 routes-up.bat和routes-down.bat为Tunsafe在连接前和断开后调用的写入/删除路由表的批处理文件。通过Tunsafe的PreUp和PostDown命令调用。
 
-cmroute.dll上述两个批处理文件调用，作用是秒载/秒删路由表。即使有数千条路由表也能秒载入，秒删除。
+cmroute.dll会被上述两个批处理文件调用，作用是秒载/秒删路由表。即使有数千条路由表也能秒载入，秒删除。
 
 ## 使用方法
 

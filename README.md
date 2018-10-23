@@ -3,6 +3,14 @@
 ## 介绍
 为使用各类全局代理VPN的windows用户提供国内国外IP的分流服务。原理是将国内IP写进系统路由表，路由表以外的IP走VPN代理。
 
+## 文件说明：
+
+add.txt和del.txt为写入和删除时使用的路由表；
+
+routes-up.bat和routes-down.bat为Tunsafe在连接前和断开后调用的写入/删除路由表的批处理文件。通过Tunsafe的PreUp和PostDown命令调用。
+
+cmroute.dll上述两个批处理文件调用，作用是秒载/秒删路由表。即使有数千条路由表也能秒载入，秒删除。
+
 ## 使用方法
 
 ### Wireguard
@@ -11,14 +19,6 @@
 #### 2. 开启Tunsafe的Pr/Post命令功能。在"Option"选择"Allow Pre/Post Commands"
 
 #### 3. 下载route.zip解压到Tunsafe安装目录。
-
-文件说明：
-
-add.txt和del.txt为写入和删除时使用的路由表；
-
-routes-up.bat和routes-down.bat为Tunsafe在连接前和断开后调用的写入/删除路由表的批处理文件。通过Tunsafe的PreUp和PostDown命令调用。
-
-cmroute.dll上述两个批处理文件调用，作用是秒载/秒删路由表。即使有数千条路由表也能秒载入，秒删除。
 
 #### 4. Wireguard客户端配置文件加入PreUp,Postdown命令调用批处理文件。
 

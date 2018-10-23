@@ -31,3 +31,6 @@ PostDown = start D:\Program Files\TunSafe\route\routes-down.bat
 
 #### 5. 正常使用Tunsafe点击connect就会调用routes-up.bat将国内IP写进系统路由表，断开disconnect则会调用routes-down.bat删除路由表。
 连接成功后可上 http://ip111.cn/ 测试自己的IP。
+
+### OpenVPN
+#### TODO

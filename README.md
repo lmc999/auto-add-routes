@@ -25,6 +25,7 @@ cmroute.dll会被上述两个批处理文件调用，作用是秒载/秒删路�
 假设你的Tunsafe安装在D盘Program Files目录下,你需要在客户端配置文件添加以下两条命令
 
 PreUp = start D:\Program Files\TunSafe\route\routes-up.bat
+
 PostDown = start D:\Program Files\TunSafe\route\routes-down.bat
 
 设置实例请参考sample.conf

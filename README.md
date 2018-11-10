@@ -28,7 +28,7 @@ PreUp = start D:\abc\TunSafe\route\routes-up.bat
 
 PostDown = start D:\abc\TunSafe\route\routes-down.bat
 
-设置实例请参考sample.conf
+设置实例请参考[sample.conf](https://github.com/lmc999/auto-add-routes/blob/master/sample.conf)
 
 #### 5. 正常使用Tunsafe点击connect就会调用routes-up.bat将国内IP写进系统路由表，断开disconnect则会调用routes-down.bat删除路由表。
 连接成功后可上 http://ip111.cn/ 测试自己的IP。

@@ -33,5 +33,9 @@ PostDown = start D:\abc\TunSafe\route\routes-down.bat
 #### 5. 正常使用Tunsafe点击connect就会调用routes-up.bat将国内IP写进系统路由表，断开disconnect则会调用routes-down.bat删除路由表。
 连接成功后可上 http://ip111.cn/ 测试自己的IP。
 
+## 关于分流后国内访问慢，无法播放网站版权视频/音乐
+
+### 因为你访问的国内网站有海外节点，当你使用WG时DNS一般默认是8.8.8.8。这是一个海外的DNS，访问有海外节点的网站时会把你解析到海外节点，所以会被认为从大陆地区以外访问，这时候访问网站会变慢或者版权视频/音乐无法播放。解决办法是不要边用WG边上这些网站，这不是域名分流！
+
 ### OpenVPN
 #### TODO

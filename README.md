@@ -11,7 +11,7 @@ routes-up.bat和routes-down.bat为Tunsafe在连接前和断开后调用的写入
 
 client_pre.bat和client_down.bat为Openvpn在连接前和断开后调用的写入/删除路由表的批处理文件。Openvpn连接时会自动调用。
 
-cmroute.dll会被上述两个批处理文件调用，作用是秒载/秒删路由表。即使有数千条路由表也能秒载入，秒删除。
+cmroute.dll会被上述批处理文件调用，作用是秒载/秒删路由表。即使有数千条路由表也能秒载入，秒删除。
 
 ## 使用方法
 

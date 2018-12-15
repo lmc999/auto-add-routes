@@ -1,0 +1,13 @@
+[Interface]
+PrivateKey = ***YourPrivateKey***
+ListenPort = ***YourPort***
+PreUp = start D:\abc\TunSafe\route\routes-up.bat
+PostDown = start D:\abc\TunSafe\route\routes-down.bat
+Address = 10.0.0.2/24 
+DNS = 8.8.8.8
+MTU = 1250
+[Peer]
+PublicKey = ***YourPublicKey***
+Endpoint = ***YourIp:YourPort***
+AllowedIPs = 0.0.0.0/0, ::0/0
+PersistentKeepalive = 25

@@ -42,6 +42,8 @@ PostDown = start D:\software\TunSafe\route\dns-down.bat
 
 ExcludedIPs = 127.0.0.1/32
 
+`然后修改配置文件的DNS地址为本机地址即：127.0.0.1`
+
 设置实例请参考[sample.conf](https://raw.githubusercontent.com/lmc999/auto-add-routes/master/wireguard/sample.conf)
 
 #### 5. 正常使用Tunsafe点击connect就会⑴调用routes-up.bat将国内IP写进系统路由表，⑵启动overture DNS服务

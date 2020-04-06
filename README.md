@@ -19,6 +19,9 @@ cmroute.dll会被上述批处理文件调用，作用是秒载/秒删路由表�
 
 Overture使用方法可以参考：https://moe.best/tutorial/overture.html
 
+## 分流原理
+[请参考wiki](https://github.com/lmc999/auto-add-routes/wiki)
+
 ## 使用方法
 
 ### Wireguard

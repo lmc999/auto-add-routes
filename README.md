@@ -1,3 +1,4 @@
+![]( https://visitor-badge.glitch.me/badge?page_id=lmc999_add_route)
 # auto-add-routes
 
 ## 介绍

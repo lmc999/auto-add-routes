@@ -14,7 +14,8 @@ client_pre.bat和client_down.bat为Openvpn在连接前和断开后调用的写�
 
 cmroute.dll会被上述批处理文件调用，作用是秒载/秒删路由表。即使有数千条路由表也能秒载入，秒删除。
 
-#### `2020-2-22更新：集成Overture DNS服务，国内IP/域名自动使用国内DNS解析；海外域名/IP使用国外DNS解析`
+#### `2020-2-22更新：Tunsafe集成Overture DNS服务，国内IP/域名自动使用国内DNS解析；海外域名/IP使用国外DNS解析`
+#### `2020-8-15更新：OpenVPN集成Overture DNS服务，国内IP/域名自动使用国内DNS解析；海外域名/IP使用国外DNS解析`
 
 [Overture项目地址](https://github.com/shawn1m/overture)
 
@@ -62,7 +63,11 @@ ExcludedIPs = 127.0.0.1/32
 
 假如你的配置文件不是client.ovpn而是abc.ovpn，你需要将client_pre.bat和client_down.bat分别改名为abc_pre.bat和abc_down.bat，否则OPENVPN无法自动调用批处理文件。
 
-#### 2. OPENVPN点击Connect连接就会调用client_pre.bat将国内IP写进系统路由表，断开disconnect则会调用client_down.bat删除路由表。
+#### 2. 添加以下参数到客户端配置文件client.ovpn
+    pull-filter ignore "dhcp-option DNS"
+    dhcp-option DNS 127.0.0.1
+
+#### 3. OPENVPN点击Connect连接就会调用client_pre.bat将国内IP写进系统路由表，断开disconnect则会调用client_down.bat删除路由表。
 
 
 

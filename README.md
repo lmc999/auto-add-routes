@@ -37,15 +37,15 @@ Overture使用方法可以参考：https://moe.best/tutorial/overture.html
 
 假设你的Tunsafe安装在D盘abc目录下,你需要在客户端配置文件添加以下五条命令
 
-PreUp = start D:\abc\TunSafe\route\routes-up.bat
+    PreUp = start D:\abc\TunSafe\route\routes-up.bat
 
-PostUp = start D:\abc\TunSafe\route\dns-up.bat
+    PostUp = start D:\abc\TunSafe\route\dns-up.bat
 
-PostDown = start D:\abc\TunSafe\route\routes-down.bat
+    PostDown = start D:\abc\TunSafe\route\routes-down.bat
 
-PostDown = start D:\software\TunSafe\route\dns-down.bat
+    PostDown = start D:\software\TunSafe\route\dns-down.bat
 
-ExcludedIPs = 127.0.0.1/32
+    ExcludedIPs = 127.0.0.1/32
 
 `然后修改配置文件的DNS地址为本机地址即：127.0.0.1`
 

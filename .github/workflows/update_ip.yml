@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: 'run the script'
-        run: bash /cron/ip.sh
+        run: bash ./cron/ip.sh
         
       - name: 'Commit'
         run: |

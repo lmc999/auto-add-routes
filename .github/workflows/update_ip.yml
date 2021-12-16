@@ -1,0 +1,26 @@
+name: 'update'
+on: 
+  push:
+  schedule:
+    - cron: '0 1 1 * *'
+jobs:
+  run_bash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout codes'
+        uses: actions/checkout@v2
+        
+      - name: 'run the script'
+        run: bash /cron/ip.sh
+        
+      - name: 'Commit'
+        run: |
+          git config --global user.email reid.vps@gmail.com
+          git config --global user.name lmc999
+          git add .
+          git commit -m"update on:`date`"
+        
+      - name: 'Push changes'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

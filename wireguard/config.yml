@@ -12,8 +12,8 @@ primaryDNS:
       externalIP:
       noCookie: true
 alternativeDNS:
-  - name: 114DNS
-    address: 114.114.114.114:53
+  - name: CloudFlare
+    address: 1.0.0.1:53
     protocol: udp
     socks5Address:
     timeout: 6
@@ -24,7 +24,7 @@ alternativeDNS:
 onlyPrimaryDNS: false
 ipv6UseAlternativeDNS: false
 alternativeDNSConcurrent: false
-whenPrimaryDNSAnswerNoneUse: primaryDNS
+whenPrimaryDNSAnswerNoneUse: alternativeDNS
 ipNetworkFile:
   primary: ./ip_network_primary_sample
   alternative: ./ip_network_alternative_sample

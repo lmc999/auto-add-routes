@@ -40,8 +40,8 @@ function cnip(){
 	md5_1=$(echo $result | awk 'NR==1' | awk '{print $1}')
 	md5_2=$(echo $result | awk 'NR==2' | awk '{print $1}')
 	if [[ "$md5_1" != "$md5_2" ]];then
-		cp ./china_ip_list.txt ./wireguard/ip_network_primary_sample
-		cp ./china_ip_list.txt ./openvpn/ip_network_primary_sample
+		cp -f ./china_ip_list.txt ./wireguard/ip_network_primary_sample
+		cp -f ./china_ip_list.txt ./openvpn/ip_network_primary_sample
 	fi
 }
 
@@ -59,12 +59,12 @@ function generate(){
 		IP=$(echo $line | cut -d "/" -f1)
 		CIDR=$(echo $line | cut -d "/" -f2)
 		eval NETMASK=\$cidr_${CIDR}
-		echo "add $IP mask $NETMASK default METRIC default IF default" >> add.txt
-		echo "delete $IP mask $NETMASK default METRIC default IF default" >> del.txt
+		echo "add $IP mask $NETMASK default METRIC default IF default" >> ./add.txt
+		echo "delete $IP mask $NETMASK default METRIC default IF default" >> ./del.txt
 	done < ./china_ip_list.txt
 	rm ./china_ip_list.txt
-	cp ./add.txt ./wireguard/add.txt ./openvpn/add.txt
-	cp ./del.txt ./wireguard/del.txt ./openvpn/del.txt
+	cp -f ./add.txt ./wireguard/add.txt ./openvpn/add.txt
+	cp -f ./del.txt ./wireguard/del.txt ./openvpn/del.txt
 }
 
 function packup(){

@@ -41,6 +41,7 @@ function cnip(){
 	md5_2=$(echo $result | awk 'NR==2' | awk '{print $1}')
 	if [[ "$md5_1" != "$md5_2" ]];then
 		cp ./china_ip_list.txt ./wireguard/ip_network_primary_sample
+		cp ./china_ip_list.txt ./openvpn/ip_network_primary_sample
 	fi
 }
 
@@ -48,9 +49,10 @@ function gfwdomain(){
 	curl https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt | base64 -d | sort -u | sed '/^$\|@@/d'| sed 's#!.\+##; s#|##g; s#@##g; s#http:\/\/##; s#https:\/\/##;' | sed '/\*/d; /apple\.com/d; /sina\.cn/d; /sina\.com\.cn/d; /baidu\.com/d; /qq\.com/d' | sed '/^[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+$/d' | grep '^[0-9a-zA-Z\.-]\+$' | grep '\.' | sed 's#^\.\+##' | sort -u > /tmp/temp_gfwlist.txt
     curl https://raw.githubusercontent.com/hq450/fancyss/master/rules/gfwlist.conf | sed 's/ipset=\/\.//g; s/\/gfwlist//g; /^server/d' > /tmp/temp_koolshare.txt
     cat /tmp/temp_gfwlist.txt /tmp/temp_koolshare.txt | sort -u > ./wireguard/domain_alternative_sample
+	cp ./wireguard/domain_alternative_sample ./openvpn/domain_alternative_sample
 }
 	
-rm ./add.txt del.txt
+rm ./add.txt ./del.txt
 
 function generate(){
 	while read -r line || [[ -n $line ]];do
@@ -61,11 +63,14 @@ function generate(){
 		echo "delete $IP mask $NETMASK default METRIC default IF default" >> del.txt
 	done < ./china_ip_list.txt
 	rm ./china_ip_list.txt
+	cp ./add.txt ./wireguard/add.txt ./openvpn/add.txt
+	cp ./del.txt ./wireguard/del.txt ./openvpn/del.txt
 }
 
 function packup(){
 	rm -rf ./zip/*
 	zip -r -D ./zip/wireguard.zip ./wireguard/*
+	zip -r -D ./zip/openvpn.zip ./openvpn/*
 }
 
 

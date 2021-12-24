@@ -8,14 +8,11 @@
 
 add.txt和del.txt为写入和删除时使用的路由表；
 
-routes-up.bat和routes-down.bat为Tunsafe在连接前和断开后调用的写入/删除路由表的批处理文件。通过Tunsafe的PreUp和PostDown命令调用。
+routes-up.bat和routes-down.bat为Tunsafe在连接前和断开后调用的写入/删除路由表的批处理文件。通过Wireguard的Pre/Post命令调用。
 
 client_pre.bat和client_down.bat为Openvpn在连接前和断开后调用的写入/删除路由表的批处理文件。Openvpn连接时会自动调用。
 
 cmroute.dll会被上述批处理文件调用，作用是秒载/秒删路由表。即使有数千条路由表也能秒载入，秒删除。
-
-#### `2020-2-22更新：Tunsafe集成Overture DNS服务，国内IP/域名自动使用国内DNS解析；海外域名/IP使用国外DNS解析`
-#### `2020-8-15更新：OpenVPN集成Overture DNS服务，国内IP/域名自动使用国内DNS解析；海外域名/IP使用国外DNS解析`
 
 [Overture项目地址](https://github.com/shawn1m/overture)
 
@@ -27,35 +24,39 @@ Overture使用方法可以参考：https://moe.best/tutorial/overture.html
 ## 使用方法
 
 ### Wireguard
-#### 1. 下载最新版本Tunsafe，建议使用带rc的版本。
+#### 1. 下载并安装最新版本的官方PC客户端。一般会安装在目录"C:\Program Files\WireGuard"
 
-#### 2. 开启Tunsafe的Pre/Post命令功能。在"Option"选择"Allow Pre/Post Commands"
+#### 2. 开启Wireguard的Pre/Post命令支持，只能通过修改注册表的方式开启，具体操作：
++ 以管理员身份运行cmd
++ 输入以下命令按回车
+````cmd
+reg add HKLM\Software\WireGuard /v DangerousScriptExecution /t REG_DWORD /d 1 /f
+````
+![Snipaste_2021-12-24_10-02-19.jpg](https://s2.loli.net/2021/12/24/y6SwJj1uZmdhF7E.jpg)
 
-#### 3. 下载[route.zip](https://raw.githubusercontent.com/lmc999/auto-add-routes/master/wireguard/route.zip)解压到Tunsafe安装目录。
+#### 3. 下载[此页面](https://github.com/lmc999/auto-add-routes/tree/master/wireguard)中的所有文件到"C:\Program Files\WireGuard\bat"。或者直接下载解压此[压缩档](https://github.com/lmc999/auto-add-routes/blob/master/zip/wireguard.zip)
+![Snipaste_2021-12-24_14-39-56.jpg](https://s2.loli.net/2021/12/24/bQfW1dVRAJBnge5.jpg)
 
-#### 4. Wireguard客户端配置文件加入PreUp,Postdown命令调用批处理文件。
+#### 4. 修改Wireguard客户端配置文件，加入以下Script Hook调用"C:\Program Files\WireGuard\bat"的批处理文件
 
-假设你的Tunsafe安装在D盘abc目录下,你需要在客户端配置文件添加以下五条命令
 
-    PreUp = start D:\abc\TunSafe\route\routes-up.bat
+    PreUp = "C:\Program Files\WireGuard\bat\routes-up.bat"
+    PostUp = "C:\Program Files\WireGuard\bat\dns-up.bat"
+    PreDown = "C:\Program Files\WireGuard\bat\routes-down.bat"
+    PostDown = "C:\Program Files\WireGuard\bat\dns-down.bat"
 
-    PostUp = start D:\abc\TunSafe\route\dns-up.bat
+将DNS指向本机以使用Overture作为DNS服务器
 
-    PostDown = start D:\abc\TunSafe\route\routes-down.bat
+    DNS = 127.0.0.1
 
-    PostDown = start D:\software\TunSafe\route\dns-down.bat
+关闭Wireguard的kill switch并保存修改
 
-    ExcludedIPs = 127.0.0.1/32
+![Snipaste_2021-12-24_11-08-08.jpg](https://s2.loli.net/2021/12/24/5tVlq2fAiUhT7HG.jpg)
 
-`然后修改配置文件的DNS地址为本机地址即：127.0.0.1`
+#### 5. 如配置正确，此时点击连接Wireguard会⑴自动调用routes-up.bat将国内IP写进系统路由表，⑵启动overture DNS服务器
 
-设置实例请参考[sample.conf](https://raw.githubusercontent.com/lmc999/auto-add-routes/master/wireguard/sample.conf)
 
-#### 5. 正常使用Tunsafe点击connect就会⑴调用routes-up.bat将国内IP写进系统路由表，⑵启动overture DNS服务
-
-####    断开disconnect则会⑴调用routes-down.bat删除路由表，⑵关闭overture DNS服务
-
-连接成功后可上 http://ip111.cn/ 测试自己的IP。
+### 连接成功后可上[ip.skk.moe](https://ip.skk.moe)测试一下看是否正确分流。
 
 ### Openvpn
 

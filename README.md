@@ -2,7 +2,7 @@
 # auto-add-routes
 
 ## 介绍
-为使用各类全局代理VPN的windows用户提供国内国外IP/域名的分流服务。
+为Windows平台上的全局代理VPN添加国内IP/域名分流功能。
 
 ## 文件说明：
 

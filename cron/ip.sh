@@ -63,8 +63,8 @@ function generate(){
 		echo "delete $IP mask $NETMASK default METRIC default IF default" >> ./del.txt
 	done < ./china_ip_list.txt
 	rm ./china_ip_list.txt
-	cp -f ./add.txt ./wireguard/add.txt ./openvpn/add.txt
-	cp -f ./del.txt ./wireguard/del.txt ./openvpn/del.txt
+	cp -f ./add.txt ./wireguard/add.txt && cp -f ./add.txt ./openvpn/add.txt
+	cp -f ./del.txt ./wireguard/del.txt && cp -f ./del.txt ./openvpn/del.txt
 }
 
 function packup(){

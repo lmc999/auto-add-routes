@@ -1,6 +1,5 @@
-#!/bin/bash
-curl -o ./china_ip_list.txt "https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt"
-rm ./add.txt del.txt
+#!/bin/bash 
+
 cidr_32=255.255.255.255
 cidr_31=255.255.255.254
 cidr_30=255.255.255.252
@@ -34,6 +33,25 @@ cidr_3=224.0.0.0
 cidr_2=192.0.0.0
 cidr_1=128.0.0.0
 
+curl -o ./china_ip_list.txt "https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt"
+
+function cnip(){
+	result=$(md5sum ./china_ip_list.txt)
+	md5_1=$(echo $result | awk 'NR==1' | awk '{print $1}')
+	md5_2=$(echo $result | awk 'NR==2' | awk '{print $1}')
+	if [[ "$md5_1" != "$md5_2" ]];then
+		cp ./china_ip_list.txt /wireguard/ip_network_primary_sample
+	fi
+}
+
+function gfwdomain(){
+	curl https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt | base64 -d | sort -u | sed '/^$\|@@/d'| sed 's#!.\+##; s#|##g; s#@##g; s#http:\/\/##; s#https:\/\/##;' | sed '/\*/d; /apple\.com/d; /sina\.cn/d; /sina\.com\.cn/d; /baidu\.com/d; /qq\.com/d' | sed '/^[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+$/d' | grep '^[0-9a-zA-Z\.-]\+$' | grep '\.' | sed 's#^\.\+##' | sort -u > /tmp/temp_gfwlist.txt
+    curl https://raw.githubusercontent.com/hq450/fancyss/master/rules/gfwlist.conf | sed 's/ipset=\/\.//g; s/\/gfwlist//g; /^server/d' > /tmp/temp_koolshare.txt
+    cat /tmp/temp_gfwlist.txt /tmp/temp_koolshare.txt | sort -u > /wireguard/domain_alternative_sample
+}
+	
+rm ./add.txt del.txt
+
 function generate(){
 	while read -r line || [[ -n $line ]];do
 		IP=$(echo $line | cut -d "/" -f1)
@@ -45,4 +63,12 @@ function generate(){
 	rm ./china_ip_list.txt
 }
 
+function packup(){
+	zip -q -r /zip/wireguard.zip wireguard 
+}
+
+
+cnip
+gfwdomain
 generate
+packup

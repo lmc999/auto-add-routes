@@ -64,7 +64,7 @@ function generate(){
 }
 
 function packup(){
-	zip -q -j ./zip/wireguard.zip ./wireguard/*
+	zip -q -D ./zip/wireguard.zip ./wireguard/*
 }
 
 

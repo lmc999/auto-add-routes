@@ -8,7 +8,7 @@
 
 add.txt和del.txt为写入和删除时使用的路由表；
 
-routes-up.bat和routes-down.bat为Tunsafe在连接前和断开后调用的写入/删除路由表的批处理文件。通过Wireguard的Pre/Post命令调用。
+routes-up.bat和routes-down.bat为Wireguard在连接前和断开后调用的写入/删除路由表的批处理文件。通过Wireguard的Pre/Post命令调用。
 
 client_pre.bat和client_down.bat为Openvpn在连接前和断开后调用的写入/删除路由表的批处理文件。Openvpn连接时会自动调用。
 

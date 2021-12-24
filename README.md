@@ -60,7 +60,7 @@ reg add HKLM\Software\WireGuard /v DangerousScriptExecution /t REG_DWORD /d 1 /f
 
 ### Openvpn
 
-#### 1. 下载[client.zip](https://raw.githubusercontent.com/lmc999/auto-add-routes/master/openvpn/client.zip)解压到OPENVPN的config文件夹中，需要确保解压出的文件与你的配置文件client.ovpn保存在同一目录中。
+#### 1. 下载[openvpn.zip](https://github.com/lmc999/auto-add-routes/raw/master/zip/openvpn.zip)解压到OPENVPN的config文件夹中，需要确保解压出的文件与你的配置文件client.ovpn保存在同一目录中。
 
 假如你的配置文件不是client.ovpn而是abc.ovpn，你需要将client_pre.bat和client_down.bat分别改名为abc_pre.bat和abc_down.bat，否则OPENVPN无法自动调用批处理文件。
 
